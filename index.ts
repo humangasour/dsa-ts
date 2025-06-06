@@ -1,6 +1,5 @@
-import { containsCommonItemsBrute } from "./common/containsCommonItems";
+import { MyArray } from "./dataStructures/arrays/arrayImplementation";
 
-const array1 = ["a", "b", "c", "e"];
-const array2 = ["e", "f", "g"];
-
-console.log(containsCommonItemsBrute(array1, array2));
+const newArray = new MyArray<number>();
+newArray.push(1);
+console.log(newArray);
