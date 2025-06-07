@@ -1,5 +1,3 @@
-import { MyArray } from "./dataStructures/arrays/arrayImplementation";
+import { reverseStringTwoPointer } from "./exercises/arrays/reverseString";
 
-const newArray = new MyArray<number>();
-newArray.push(1);
-console.log(newArray);
+console.log(reverseStringTwoPointer("hey what's up?"));
