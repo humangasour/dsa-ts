@@ -1,15 +1,13 @@
-import { LinkedList } from "./dataStructures/linkedLists/LinkedList";
+import { Stack } from "./dataStructures/stack/Stack";
 
-const myLinkedList = new LinkedList();
+const myStack = new Stack();
 
-myLinkedList.append(10);
-myLinkedList.append(20);
-myLinkedList.append(30);
-myLinkedList.append(40);
-myLinkedList.append(50);
+myStack.push("google");
+myStack.push("bing");
+myStack.push("yahoo");
+myStack.push("chatgpt");
 
-console.log(myLinkedList.toString());
+myStack.pop();
 
-myLinkedList.reverse();
-
-console.log(myLinkedList.toString());
+// console.log(myStack.toString());
+console.log(myStack.peek());

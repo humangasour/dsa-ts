@@ -1,4 +1,4 @@
-type Optional<T> = T | null;
+import { Optional } from "../../core/types/utility";
 
 /**
  * Represents a node in a singly linked list.
