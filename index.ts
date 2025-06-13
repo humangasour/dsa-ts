@@ -1,13 +1,8 @@
-import { Stack } from "./dataStructures/stack/Stack";
+import { BinarySearchTree } from "./dataStructures/trees/binarySearchTree/BinarySearchTree";
 
-const myStack = new Stack();
+const bst = new BinarySearchTree(10);
+bst.insert(5);
+bst.insert(15);
+bst.insert(20);
 
-myStack.push("google");
-myStack.push("bing");
-myStack.push("yahoo");
-myStack.push("chatgpt");
-
-myStack.pop();
-
-// console.log(myStack.toString());
-console.log(myStack.peek());
+console.log(bst.toStringTree());
