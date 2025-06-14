@@ -1,30 +1,7 @@
-import { Graph } from "./dataStructures/graph/Graph";
+import { insertionSort } from "./algorithms/sorting/insertionSort";
 
-// Example usage:
-const myGraph = new Graph();
-myGraph.addVertex("0");
-myGraph.addVertex("1");
-myGraph.addVertex("2");
-myGraph.addVertex("3");
-myGraph.addVertex("4");
-myGraph.addVertex("5");
-myGraph.addVertex("6");
+const unSortedArray = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 
-myGraph.addEdge("3", "1");
-myGraph.addEdge("3", "4");
-myGraph.addEdge("4", "2");
-myGraph.addEdge("4", "5");
-myGraph.addEdge("1", "2");
-myGraph.addEdge("1", "0");
-myGraph.addEdge("0", "2");
-myGraph.addEdge("6", "5");
+insertionSort(unSortedArray);
 
-console.log(myGraph.showConnections());
-//Answer:
-// 0-->1 2
-// 1-->3 2 0
-// 2-->4 1 0
-// 3-->1 4
-// 4-->3 2 5
-// 5-->4 6
-// 6-->5
+console.log(unSortedArray);
