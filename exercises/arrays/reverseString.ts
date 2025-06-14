@@ -51,7 +51,7 @@ export const reverseStringTwoPointer = (sentence: string): string => {
     let right = arr.length - 1;
 
     while (left < right) {
-        swap(arr, left, right);
+        [arr[left], arr[right]] = [arr[right], arr[left]];
         left++;
         right--;
     }
@@ -60,14 +60,46 @@ export const reverseStringTwoPointer = (sentence: string): string => {
 };
 
 /**
- * Swaps two elements in an array.
+ * Reverses a given string using recursion.
  *
- * @param {T[]} arr - The array containing the elements to swap.
- * @param {number} i - The index of the first element.
- * @param {number} j - The index of the second element.
+ * @param {string} str - The string to be reversed.
+ * @returns {string} The reversed string.
+ * @throws {TypeError} If the input is not a string.
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
  */
-function swap<T>(arr: T[], i: number, j: number): void {
-    const temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-}
+export const reverseStringRecursive = (str: string): string => {
+    if (typeof str !== "string") {
+        throw new TypeError("Input should be a string");
+    }
+
+    if (str.length <= 1) return str;
+
+    return reverseStringRecursive(str.slice(1)) + str[0];
+};
+
+/**
+ * Reverses a given string using recursion with tail call optimization.
+ *
+ * @param {string} str - The string to be reversed.
+ * @returns {string} The reversed string.
+ * @throws {TypeError} If the input is not a string.
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
+ */
+export const reverseStringTailRecursive = (str: string): string => {
+    if (typeof str !== "string") {
+        throw new TypeError("Input should be a string");
+    }
+
+    if (str.length <= 1) return str;
+
+    const helper = (remaining: string, acc: string): string => {
+        if (remaining.length === 0) return acc;
+        return helper(remaining.slice(1), remaining[0] + acc);
+    };
+
+    return helper(str.slice(1), "");
+};
