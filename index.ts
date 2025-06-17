@@ -1,7 +1,10 @@
-import { insertionSort } from "./algorithms/sorting/insertionSort";
+import { BinarySearchTree } from "./dataStructures/trees/binarySearchTree/BinarySearchTree";
 
-const unSortedArray = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
-
-insertionSort(unSortedArray);
-
-console.log(unSortedArray);
+const tree = new BinarySearchTree();
+tree.insert(9);
+tree.insert(4);
+tree.insert(6);
+tree.insert(20);
+tree.insert(170);
+tree.insert(15);
+tree.insert(1);

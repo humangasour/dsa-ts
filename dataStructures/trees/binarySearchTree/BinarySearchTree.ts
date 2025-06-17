@@ -163,4 +163,56 @@ export class BinarySearchTree {
 
         return result;
     }
+
+    /**
+     * Performs a breadth-first (level-order) traversal on the binary search tree.
+     * @returns {number[]} An array of node values in level-order traversal.
+     */
+    public breadthFirstSearch(): number[] {
+        if (!this.root) {
+            return [];
+        }
+
+        const result: number[] = [];
+        const queue: Node[] = [this.root];
+
+        while (queue.length > 0) {
+            const current = queue.shift();
+            if (!current) continue;
+
+            result.push(current.value);
+
+            if (current.left) queue.push(current.left);
+            if (current.right) queue.push(current.right);
+        }
+
+        return result;
+    }
+
+    /**
+     * Performs a breadth-first (level-order) traversal on the binary search tree.
+     * @returns {number[]} An array of node values in level-order traversal.
+     */
+    public breadthFirstSearchRecursive(): number[] {
+        const result: number[] = [];
+        if (!this.root) return result;
+
+        this._bfsRecursive([this.root], result);
+        return result;
+    }
+
+    private _bfsRecursive(levelNodes: Node[], result: number[]): void {
+        if (levelNodes.length === 0) return;
+
+        // 1. Push values of current level nodes
+        result.push(...levelNodes.map((node) => node.value));
+        // 2. Build next level array from children
+        const nextLevel = levelNodes.reduce((acc: Node[], node: Node) => {
+            if (node.left) acc.push(node.left);
+            if (node.right) acc.push(node.right);
+            return acc;
+        }, []);
+        // 3. Recurse on next level
+        return this._bfsRecursive(nextLevel, result);
+    }
 }
