@@ -177,17 +177,18 @@ export class BinarySearchTree {
         const queue: Node[] = [this.root];
 
         while (queue.length > 0) {
-            const current = queue.shift();
-            if (!current) continue;
-
+            const current = queue.shift()!;
             result.push(current.value);
-
             if (current.left) queue.push(current.left);
             if (current.right) queue.push(current.right);
         }
 
         return result;
     }
+
+    //      9
+    //  4       20
+    //1   6   15   170
 
     /**
      * Performs a breadth-first (level-order) traversal on the binary search tree.
@@ -215,4 +216,61 @@ export class BinarySearchTree {
         // 3. Recurse on next level
         return this._bfsRecursive(nextLevel, result);
     }
+
+    /**
+     * Performs an in-order depth-first traversal on the binary search tree.
+     * @returns {number[]} An array of node values in in-order traversal.
+     */
+    public depthFirstSearchInOrder(): number[] {
+        const result: number[] = [];
+        this._dfsInOrder(this.root, result);
+        return result;
+    }
+
+    /**
+     * Performs a pre-order depth-first traversal on the binary search tree.
+     * @returns {number[]} An array of node values in pre-order traversal.
+     */
+    public depthFirstSearchPreOrder(): number[] {
+        const result: number[] = [];
+        this._dfsPreOrder(this.root, result);
+        return result;
+    }
+
+    /**
+     * Performs a post-order depth-first traversal on the binary search tree.
+     * @returns {number[]} An array of node values in post-order traversal.
+     */
+    public depthFirstSearchPostOrder(): number[] {
+        const result: number[] = [];
+        this._dfsPostOrder(this.root, result);
+        return result;
+    }
+
+    private _dfsInOrder(node: Optional<Node>, result: number[]): void {
+        if (!node) return;
+        this._dfsInOrder(node.left, result); // Left
+        result.push(node.value); // Node
+        this._dfsInOrder(node.right, result); // Right
+    }
+
+    private _dfsPreOrder(node: Optional<Node>, result: number[]): void {
+        if (!node) return;
+
+        result.push(node.value); // Node
+        this._dfsPreOrder(node.left, result); // Left
+        this._dfsPreOrder(node.right, result); // Right
+    }
+
+    private _dfsPostOrder(node: Optional<Node>, result: number[]): void {
+        if (!node) return;
+
+        this._dfsPostOrder(node.left, result); // Left
+        this._dfsPostOrder(node.right, result); // Right
+        result.push(node.value); // Node
+    }
 }
+
+//      9
+//  4       20
+//1   6   15   170
