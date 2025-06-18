@@ -3,6 +3,8 @@ import {
     fibonacciIterative,
     fibonacciRecursive,
     fibonacciTailRecursive,
+    fibonacciMemoized,
+    createMemoizedFibonacci,
 } from "./fibonacci";
 
 describe("fibonacci", () => {
@@ -58,6 +60,51 @@ describe("fibonacci", () => {
             expect(fibonacciTailRecursive(1)).to.equal(1);
             expect(fibonacciTailRecursive(6)).to.equal(8);
             expect(fibonacciTailRecursive(10)).to.equal(55);
+        });
+    });
+
+    describe("fibonacciMemoized", () => {
+        it("should throw TypeError if input is not a non-negative integer", () => {
+            expect(() => fibonacciMemoized(null as unknown as number)).to.throw(
+                TypeError
+            );
+            expect(() =>
+                fibonacciMemoized("bad" as unknown as number)
+            ).to.throw(TypeError);
+            expect(() => fibonacciMemoized(-1)).to.throw(TypeError);
+            expect(() => fibonacciMemoized(3.14)).to.throw(TypeError);
+        });
+
+        it("should return correct Fibonacci values", () => {
+            expect(fibonacciMemoized(0)).to.equal(0);
+            expect(fibonacciMemoized(1)).to.equal(1);
+            expect(fibonacciMemoized(4)).to.equal(3);
+            expect(fibonacciMemoized(10)).to.equal(55);
+        });
+    });
+
+    describe("createMemoizedFibonacci", () => {
+        it("should return a function that throws TypeError for invalid input", () => {
+            const fib = createMemoizedFibonacci();
+            expect(() => fib(-1)).to.throw(TypeError);
+            expect(() => fib(NaN)).to.throw(TypeError);
+            expect(() => fib("7" as unknown as number)).to.throw(TypeError);
+        });
+
+        it("should return a function that computes correct Fibonacci values", () => {
+            const fib = createMemoizedFibonacci();
+            expect(fib(0)).to.equal(0);
+            expect(fib(1)).to.equal(1);
+            expect(fib(5)).to.equal(5);
+            expect(fib(10)).to.equal(55);
+        });
+
+        it("should reuse memoized values across multiple calls", () => {
+            const fib = createMemoizedFibonacci();
+            expect(fib(20)).to.equal(6765);
+            // Second call should be instant, same result
+            expect(fib(20)).to.equal(6765);
+            expect(fib(21)).to.equal(10946);
         });
     });
 });
