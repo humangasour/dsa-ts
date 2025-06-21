@@ -91,3 +91,46 @@ export const hasPairWithSumSorted = (arr: number[], total: number): boolean => {
     }
     return false;
 };
+
+/**
+ *
+ * @param {number[]} arr - Array of sorted integers.
+ * @param {number} total - Target sum.
+ * @returns {Array<number[]>} - All unique pairs of numbers that sum to target.
+ *
+ * @throws {TypeError} - If input is not an array of integers.
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(n) in worst case for output (O(1) otherwise)
+ */
+export const hasPairsWithSum = (
+    arr: number[],
+    total: number
+): Array<number[]> => {
+    if (!Array.isArray(arr)) {
+        throw new TypeError("Input must be an array of integers.");
+    }
+
+    const output: Array<number[]> = [];
+    let left = 0;
+    let right = arr.length - 1;
+
+    while (left < right) {
+        const sum = arr[left] + arr[right];
+
+        if (sum === total) {
+            output.push([arr[left], arr[right]]);
+            const currentLeft = arr[left];
+            const currentRight = arr[right];
+
+            while (left < right && arr[left] === currentLeft) left++;
+            while (left < right && arr[right] === currentRight) right--;
+        } else if (sum < total) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+
+    return output;
+};
