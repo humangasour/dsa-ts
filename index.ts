@@ -1,10 +1,3 @@
-import { BinarySearchTree } from "./dataStructures/trees/binarySearchTree/BinarySearchTree";
+import { maxSubArrayKadane } from "./exercises/arrays/maxSubarray";
 
-const tree = new BinarySearchTree();
-tree.insert(9);
-tree.insert(4);
-tree.insert(6);
-tree.insert(20);
-tree.insert(170);
-tree.insert(15);
-tree.insert(1);
+console.log(maxSubArrayKadane([1, -2, 3, -2]));

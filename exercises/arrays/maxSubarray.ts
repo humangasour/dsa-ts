@@ -61,6 +61,40 @@ export function maxSubArrayKadane(nums: number[]): number {
 }
 
 /**
+ * Kadane's algorithm to find the maximum subarray sum in linear time.
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ *
+ * @param {number[]} nums - Array of integers
+ * @returns {number} Maximum sum of any contiguous subarray
+ */
+export function maxSubArrayKadaneSubarray(nums: number[]): number[] {
+    let globalMax = nums[0];
+    let localMax = nums[0];
+    let start = 0;
+    let end = 0;
+    let tempStart = 0;
+
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] > localMax + nums[i]) {
+            localMax = nums[i];
+            tempStart = i;
+        } else {
+            localMax += nums[i];
+        }
+
+        if (localMax > globalMax) {
+            globalMax = localMax;
+            start = tempStart;
+            end = i;
+        }
+    }
+
+    return nums.slice(start, end + 1);
+}
+
+/**
  * Divide and conquer approach to find the maximum subarray sum.
  *
  * Time Complexity: O(n log n)
